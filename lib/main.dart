@@ -1,37 +1,69 @@
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'configs/theme.dart';
+import 'data/repositories/auth_repository.dart';
+import 'data/repositories/story_repository.dart';
+import 'providers/add_provider.dart';
+import 'providers/localization_provider.dart';
+import 'providers/login_provider.dart';
+import 'providers/register_provider.dart';
+import 'providers/story_provider.dart';
+import 'routes/router_config.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const StoryApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class StoryApp extends StatelessWidget {
+  const StoryApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    final authRepository = AuthRepository();
+    final storyRepository = StoryRepository();
+
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => LocalizationProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => LoginProvider(authRepository: authRepository),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => RegisterProvider(authRepository: authRepository),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => StoryProvider(storyRepository: storyRepository),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AddProvider(storyRepository: storyRepository),
+        ),
+      ],
+      builder: (context, child) {
+        final localizationProvider = Provider.of<LocalizationProvider>(context);
+
+        return MaterialApp.router(
+          title: 'Story App',
+          locale: localizationProvider.locale,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('id', ''),
+            Locale('en', ''),
+          ],
+          theme: themeData,
+          routerConfig: routerConfig,
+          debugShowCheckedModeBanner: false,
+        );
+      },
     );
   }
 }
