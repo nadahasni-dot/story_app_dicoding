@@ -19,9 +19,17 @@
   "@textEmail": {
     "description": "Deskripsi mengenai variabel textEmail"
   },
+  "textName": "Nama",
+  "@textName": {
+    "description": "Deskripsi mengenai variabel textName"
+  },
   "textPassword": "Password",
   "@textPassword": {
     "description": "Deskripsi mengenai variabel textPassword"
+  },
+  "textRepeatPassword": "Ulangi Password",
+  "@textRepeatPassword": {
+    "description": "Deskripsi mengenai variabel textRepeatPassword"
   },
   "textInvalidEmail": "Masukkan email yang valid",
   "@textInvalidEmail": {
@@ -30,6 +38,10 @@
   "textInvalidPassword": "Password minimal terdiri dari 8 karakter",
   "@textInvalidPassword": {
     "description": "Deskripsi mengenai variabel textInvalidPassword"
+  },
+  "textInvalidRepeatPassword": "Password tidak sama",
+  "@textInvalidRepeatPassword": {
+    "description": "Deskripsi mengenai variabel textInvalidRepeatPassword"
   },
   "textRequired": "Input ini tidak bisa kosong",
   "@textRequired": {
@@ -62,5 +74,17 @@
   "textEmptyStory": "Tidak ada cerita untuk ditampilkan",
   "@textEmptyStory": {
     "description": "Deskripsi mengenai variabel textEmptyStory"
+  },
+  "textDontHaveAccount": "Belum memiliki akun?",
+  "@textDontHaveAccount": {
+    "description": "Deskripsi mengenai variabel textDontHaveAccount"
+  },
+  "textLoginDescription": "Masuk untuk memulai sesi",
+  "@textLoginDescription": {
+    "description": "Deskripsi mengenai variabel textLoginDescription"
+  },
+  "textRegisterDescription": "Daftarkan akun anda",
+  "@textRegisterDescription": {
+    "description": "Deskripsi mengenai variabel textRegisterDescription"
   }
 }

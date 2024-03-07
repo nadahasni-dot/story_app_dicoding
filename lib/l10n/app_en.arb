@@ -4,9 +4,12 @@
   "titleLogout": "Logout",
   "titleRegister": "Register",
   "textEmail": "Email",
+  "textName": "Name",
   "textPassword": "Password",
+  "textRepeatPassword": "Repeat Password",
   "textInvalidEmail": "Please provide valid email",
   "textInvalidPassword": "Password must be at least 8 characters",
+  "textInvalidRepeatPassword": "Repeat Password does not match",
   "textRequired": "This field can not be empty",
   "textStoryList": "Story List",
   "textStoryDetail": "Story Detail",
@@ -14,5 +17,8 @@
   "textStoryPickImage": "Pick Image",
   "textStoryPickImageGallery": "Pick from gallery",
   "textStoryPickImageCamera": "Pick from camera",
-  "textEmptyStory": "There is no story to show"
+  "textEmptyStory": "There is no story to show",
+  "textDontHaveAccount": "Don't have an account?",
+  "textLoginDescription": "Login to start a session",
+  "textRegisterDescription": "Register your account"
 }
