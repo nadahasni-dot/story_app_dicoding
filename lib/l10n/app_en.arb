@@ -1,0 +1,18 @@
+{
+  "titleApp": "Story App",
+  "titleLogin": "Login",
+  "titleLogout": "Logout",
+  "titleRegister": "Register",
+  "textEmail": "Email",
+  "textPassword": "Password",
+  "textInvalidEmail": "Please provide valid email",
+  "textInvalidPassword": "Password must be at least 8 characters",
+  "textRequired": "This field can not be empty",
+  "textStoryList": "Story List",
+  "textStoryDetail": "Story Detail",
+  "textStoryAddNew": "Add Story",
+  "textStoryPickImage": "Pick Image",
+  "textStoryPickImageGallery": "Pick from gallery",
+  "textStoryPickImageCamera": "Pick from camera",
+  "textEmptyStory": "There is no story to show"
+}
