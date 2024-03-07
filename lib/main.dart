@@ -1,6 +1,10 @@
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'configs/theme.dart';
+import 'providers/localization_provider.dart';
 
 void main() {
   runApp(const StoryApp());
@@ -9,26 +13,34 @@ void main() {
 class StoryApp extends StatelessWidget {
   const StoryApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Story App',
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => LocalizationProvider(),
+        ),
       ],
-      supportedLocales: const [
-        Locale('id', ''),
-        Locale('en', ''),
-      ],
-      theme: ThemeData(
-        useMaterial3: false,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      builder: (context, child) {
+        final localizationProvider = Provider.of<LocalizationProvider>(context);
+
+        return MaterialApp(
+          title: 'Story App',
+          locale: localizationProvider.locale,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('id', ''),
+            Locale('en', ''),
+          ],
+          theme: themeData,
+          home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        );
+      },
     );
   }
 }
