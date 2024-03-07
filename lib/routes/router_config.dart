@@ -1,5 +1,7 @@
 import 'package:go_router/go_router.dart';
 
+import '../data/models/story.dart';
+import '../modules/detail/detail_screen.dart';
 import '../modules/home/home_screen.dart';
 import '../modules/login/login_screen.dart';
 import '../modules/register/register_screen.dart';
@@ -27,6 +29,15 @@ final routerConfig = GoRouter(
       path: HomeScreen.path,
       name: HomeScreen.path,
       builder: (context, state) => const HomeScreen(),
+      routes: [
+        GoRoute(
+          path: DetailScreen.path,
+          name: DetailScreen.path,
+          builder: (context, state) => DetailScreen(
+            story: state.extra as Story,
+          ),
+        ),
+      ],
     ),
   ],
 );

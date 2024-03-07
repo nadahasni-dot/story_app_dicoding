@@ -14,14 +14,17 @@ class StoryRepository {
   }) async {
     try {
       final response = await NetworkService.get(
-          ApiEndpoints.baseUrl, ApiEndpoints.stories,
-          withToken: true,
-          queryParameters: {
-            "page": page.toString(),
-            "size": size.toString(),
-          });
+        ApiEndpoints.baseUrl,
+        ApiEndpoints.stories,
+        withToken: true,
+        headers: {},
+        queryParameters: {
+          "page": page.toString(),
+          "size": size.toString(),
+        },
+      );
 
-      final result = getStoriesResponseFromJson(response);
+      final result = GetStoriesResponse.fromJson(response);
 
       return result.listStory;
     } catch (e) {

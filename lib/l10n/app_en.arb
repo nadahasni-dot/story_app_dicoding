@@ -20,5 +20,6 @@
   "textEmptyStory": "There is no story to show",
   "textDontHaveAccount": "Don't have an account?",
   "textLoginDescription": "Login to start a session",
-  "textRegisterDescription": "Register your account"
+  "textRegisterDescription": "Register your account",
+  "textDescription": "Deskripsi"
 }

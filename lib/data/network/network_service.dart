@@ -48,7 +48,7 @@ class NetworkService {
   static Future<dynamic> get(
     String baseUrl,
     String url, {
-    Map<String, String> headers = const {},
+    required Map<String, String> headers,
     Map<String, String>? queryParameters,
     bool withToken = false,
     bool isHttps = true,
