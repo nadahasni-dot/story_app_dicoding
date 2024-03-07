@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import 'configs/theme.dart';
 import 'providers/localization_provider.dart';
+import 'routes/router_config.dart';
 
 void main() {
   runApp(const StoryApp());
@@ -24,7 +25,7 @@ class StoryApp extends StatelessWidget {
       builder: (context, child) {
         final localizationProvider = Provider.of<LocalizationProvider>(context);
 
-        return MaterialApp(
+        return MaterialApp.router(
           title: 'Story App',
           locale: localizationProvider.locale,
           localizationsDelegates: const [
@@ -38,7 +39,7 @@ class StoryApp extends StatelessWidget {
             Locale('en', ''),
           ],
           theme: themeData,
-          home: const MyHomePage(title: 'Flutter Demo Home Page'),
+          routerConfig: routerConfig,
         );
       },
     );
