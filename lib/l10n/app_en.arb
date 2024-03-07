@@ -21,5 +21,6 @@
   "textDontHaveAccount": "Don't have an account?",
   "textLoginDescription": "Login to start a session",
   "textRegisterDescription": "Register your account",
-  "textDescription": "Deskripsi"
+  "textDescription": "Deskripsi",
+  "textPleaseSelectImage": "Please select image first"
 }

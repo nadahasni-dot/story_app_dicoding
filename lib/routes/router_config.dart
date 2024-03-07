@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 
 import '../data/models/story.dart';
+import '../modules/add/add_screen.dart';
 import '../modules/detail/detail_screen.dart';
 import '../modules/home/home_screen.dart';
 import '../modules/login/login_screen.dart';
@@ -36,6 +37,11 @@ final routerConfig = GoRouter(
           builder: (context, state) => DetailScreen(
             story: state.extra as Story,
           ),
+        ),
+        GoRoute(
+          path: AddScreen.path,
+          name: AddScreen.path,
+          builder: (context, state) => const AddScreen(),
         ),
       ],
     ),

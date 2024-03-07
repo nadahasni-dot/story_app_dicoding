@@ -26,7 +26,7 @@ class _DetailScreenState extends State<DetailScreen> {
           onPressed: () => context.pop(),
           icon: const Icon(Icons.arrow_back),
         ),
-        title: Text(AppLocalizations.of(context)!.textStoryList),
+        title: Text(AppLocalizations.of(context)!.textStoryDetail),
       ),
       body: ListView(
         children: [

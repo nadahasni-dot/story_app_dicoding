@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'configs/theme.dart';
 import 'data/repositories/auth_repository.dart';
 import 'data/repositories/story_repository.dart';
+import 'providers/add_provider.dart';
 import 'providers/localization_provider.dart';
 import 'providers/login_provider.dart';
 import 'providers/register_provider.dart';
@@ -38,6 +39,9 @@ class StoryApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => StoryProvider(storyRepository: storyRepository),
         ),
+        ChangeNotifierProvider(
+          create: (context) => AddProvider(storyRepository: storyRepository),
+        ),
       ],
       builder: (context, child) {
         final localizationProvider = Provider.of<LocalizationProvider>(context);
@@ -57,6 +61,7 @@ class StoryApp extends StatelessWidget {
           ],
           theme: themeData,
           routerConfig: routerConfig,
+          debugShowCheckedModeBanner: false,
         );
       },
     );

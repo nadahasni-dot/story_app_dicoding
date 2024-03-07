@@ -90,5 +90,9 @@
   "textDescription": "Description",
   "@textDescription": {
     "description": "Deskripsi mengenai variabel textDescription"
+  },
+  "textPleaseSelectImage": "Harap pilih foto terlebih dahulu",
+  "@textPleaseSelectImage": {
+    "description": "Deskripsi mengenai variabel textPleaseSelectImage"
   }
 }
