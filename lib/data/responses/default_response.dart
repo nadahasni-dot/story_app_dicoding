@@ -1,11 +1,3 @@
-import 'dart:convert';
-
-DefaultResponse defaultResponseFromJson(String str) =>
-    DefaultResponse.fromJson(json.decode(str));
-
-String defaultResponseToJson(DefaultResponse data) =>
-    json.encode(data.toJson());
-
 class DefaultResponse {
   final bool error;
   final String message;

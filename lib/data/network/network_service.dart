@@ -84,8 +84,8 @@ class NetworkService {
   static Future<dynamic> post(
     String baseUrl,
     String url, {
-    Map<String, String> headers = const {},
-    Map<String, String> data = const {},
+    required Map<String, String> headers,
+    required Map<String, String> data,
     bool withToken = false,
     bool isHttps = true,
   }) async {

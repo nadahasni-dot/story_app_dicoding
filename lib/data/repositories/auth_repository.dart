@@ -1,25 +1,25 @@
 import 'dart:developer';
 
-import 'package:story_app_dicoding/data/responses/default_response.dart';
-
 import '../network/api_endpoints.dart';
 import '../network/network_service.dart';
+import '../responses/default_response.dart';
 import '../responses/post_login_response.dart';
 
 class AuthRepository {
-  static Future<LoginResult> login(
+  Future<LoginResult> login(
       {required String email, required String password}) async {
     try {
       final response = await NetworkService.post(
         ApiEndpoints.baseUrl,
         ApiEndpoints.login,
+        headers: {},
         data: {
           "email": email,
           "password": password,
         },
       );
 
-      final result = postLoginResponseFromJson(response);
+      final result = PostLoginResponse.fromJson(response);
 
       return result.loginResult;
     } catch (e) {
@@ -28,7 +28,7 @@ class AuthRepository {
     }
   }
 
-  static Future<bool> register({
+  Future<bool> register({
     required String name,
     required String email,
     required String password,
@@ -37,6 +37,7 @@ class AuthRepository {
       final response = await NetworkService.post(
         ApiEndpoints.baseUrl,
         ApiEndpoints.register,
+        headers: {},
         data: {
           "name": name,
           "email": email,
@@ -44,7 +45,7 @@ class AuthRepository {
         },
       );
 
-      final result = defaultResponseFromJson(response);
+      final result = DefaultResponse.fromJson(response);
 
       if (result.error) return false;
 

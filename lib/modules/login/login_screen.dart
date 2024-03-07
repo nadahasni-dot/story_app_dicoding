@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
+import '../../data/network/response_call.dart';
+import '../../providers/login_provider.dart';
 import '../../utils/email_validator.dart';
+import '../home/home_screen.dart';
 import '../register/register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -21,8 +26,25 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool isObsecure = true;
 
-  void _handleLogin() {
+  void _handleLogin() async {
     if (!formKey.currentState!.validate()) return;
+
+    final loginProvider = context.read<LoginProvider>();
+
+    final result = await loginProvider.login(
+      email: inputEmail.text.trim(),
+      password: inputPassword.text.trim(),
+    );
+
+    if (result == null) {
+      Fluttertoast.showToast(
+          msg: loginProvider.responseCall.message.toString());
+      return;
+    }
+
+    if (mounted) {
+      context.pushReplacementNamed(HomeScreen.path);
+    }
   }
 
   void _toggleObsecure() {
@@ -102,9 +124,20 @@ class _LoginScreenState extends State<LoginScreen> {
               },
             ),
             const SizedBox(height: 8),
-            ElevatedButton(
-              onPressed: _handleLogin,
-              child: Text(AppLocalizations.of(context)!.titleLogin),
+            Consumer<LoginProvider>(
+              builder: (context, value, child) {
+                return ElevatedButton(
+                  onPressed: value.responseCall.status == Status.loading
+                      ? () {}
+                      : _handleLogin,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: value.responseCall.status == Status.loading
+                        ? Colors.grey
+                        : Colors.blue,
+                  ),
+                  child: Text(AppLocalizations.of(context)!.titleLogin),
+                );
+              },
             ),
             const SizedBox(height: 16),
             Wrap(

@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'configs/theme.dart';
+import 'data/repositories/auth_repository.dart';
 import 'providers/localization_provider.dart';
+import 'providers/login_provider.dart';
+import 'providers/register_provider.dart';
 import 'routes/router_config.dart';
 
 void main() {
@@ -16,10 +19,19 @@ class StoryApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authRepository = AuthRepository();
+    // final storyRepository = StoryRepository();
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
           create: (context) => LocalizationProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => LoginProvider(authRepository: authRepository),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => RegisterProvider(authRepository: authRepository),
         ),
       ],
       builder: (context, child) {

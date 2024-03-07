@@ -8,7 +8,7 @@ import '../responses/default_response.dart';
 import '../responses/get_stories_response.dart';
 
 class StoryRepository {
-  static Future<List<Story>> getAllStories({
+  Future<List<Story>> getAllStories({
     int page = 1,
     int size = 10,
   }) async {
@@ -30,7 +30,7 @@ class StoryRepository {
     }
   }
 
-  static Future<bool> addStory({
+  Future<bool> addStory({
     required String description,
     required File image,
   }) async {
@@ -44,7 +44,7 @@ class StoryRepository {
         headers: {"Content-type": "multipart/form-data"},
       );
 
-      final result = defaultResponseFromJson(response);
+      final result = DefaultResponse.fromJson(response);
 
       if (result.error) return false;
 

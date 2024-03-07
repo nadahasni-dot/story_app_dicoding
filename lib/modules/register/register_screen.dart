@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
+import '../../data/network/response_call.dart';
+import '../../providers/register_provider.dart';
 import '../../utils/email_validator.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -22,8 +27,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool isObsecure = true;
   bool isRepeatObsecure = true;
 
-  void _handleRegister() {
+  void _handleRegister() async {
     if (!formKey.currentState!.validate()) return;
+
+    final registerProvider = context.read<RegisterProvider>();
+
+    final isRegisterComplete = await registerProvider.register(
+      name: inputName.text.trim(),
+      email: inputEmail.text.trim(),
+      password: inputRepeatPassword.text.trim(),
+    );
+
+    if (!isRegisterComplete) {
+      Fluttertoast.showToast(
+          msg: registerProvider.responseCall.message.toString());
+      return;
+    }
+
+    if (mounted) {
+      Fluttertoast.showToast(msg: "Register Success");
+      context.pop();
+    }
   }
 
   void _toggleObsecure() {
@@ -157,9 +181,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
               },
             ),
             const SizedBox(height: 8),
-            ElevatedButton(
-              onPressed: _handleRegister,
-              child: Text(AppLocalizations.of(context)!.titleRegister),
+            Consumer<RegisterProvider>(
+              builder: (context, value, child) {
+                return ElevatedButton(
+                  onPressed: value.responseCall.status == Status.loading
+                      ? () {}
+                      : _handleRegister,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: value.responseCall.status == Status.loading
+                        ? Colors.grey
+                        : Colors.blue,
+                  ),
+                  child: Text(AppLocalizations.of(context)!.titleRegister),
+                );
+              },
             ),
           ],
         ),
